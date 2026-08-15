@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AskLightly — How to Use</title>
+<style>
+  :root{
+    --accent:#F97316; --accent2:#EA580C; --ink:#1f2430; --muted:#6b7280;
+    --bg:#f7f7f8; --card:#ffffff; --line:#eceef1;
+    /* app (dark) mockup palette */
+    --a-bg:#1e1e2e; --a-header:#181825; --a-fg:#e6e6ef; --a-mut:#9aa0b4;
+    --a-line:#33334a; --a-field:#2a2a3c; --a-hover:#2f2f44;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.65 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:900px;margin:0 auto;padding:40px 22px 90px}
+  a{color:var(--accent2)}
+  h1{font-size:30px;margin:0 0 6px}
+  h2{font-size:22px;margin:44px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--accent);display:inline-block}
+  h3{font-size:16px;margin:22px 0 6px}
+  p,li{color:#2b3140}
+  code{background:#eef0f3;padding:1px 6px;border-radius:5px;font-size:14px}
+  header.hero{display:flex;gap:16px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:20px}
+  .logo{width:56px;height:56px;border-radius:14px;flex:0 0 auto;
+        background:linear-gradient(160deg,#fb923c,#ea580c);position:relative;box-shadow:0 6px 18px rgba(234,88,12,.35)}
+  .logo::before{content:"";position:absolute;left:14px;top:12px;right:14px;height:16px;background:#fff;border-radius:6px}
+  .logo::after{content:"✦";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#ea580c;font-size:20px;margin-top:2px}
+  .tag{color:var(--muted);margin:2px 0 0}
+  .lead{background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:16px 18px;margin:18px 0}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14.5px}
+  th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+  th{background:#fafafb}
+  .steps{counter-reset:s;list-style:none;padding:0}
+  .steps li{position:relative;padding:10px 0 10px 46px;border-bottom:1px solid var(--line)}
+  .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:10px;width:30px;height:30px;
+      background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+  .cap{font-size:13px;color:var(--muted);text-align:center;margin:6px 0 0}
+  figure{margin:14px 0;text-align:center}
+  /* real screenshots — render at natural size, shrink to fit, never upscale/blur */
+  .shot{max-width:100%;height:auto;border:1px solid var(--line);border-radius:10px;
+        box-shadow:0 10px 28px rgba(0,0,0,.16)}
+
+  /* ---------- App UI mockups ("screenshots") ---------- */
+  .app{background:var(--a-bg);border:1px solid var(--a-line);border-radius:12px;overflow:hidden;
+       box-shadow:0 12px 30px rgba(0,0,0,.22);color:var(--a-fg);font-size:13.5px;max-width:340px}
+  .app .hd{background:var(--a-header);padding:9px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--a-line)}
+  .app .hd .ttl{color:var(--accent);font-weight:600;flex:1}
+  .app .hd .ic{color:var(--a-mut)}
+  .grp{color:var(--a-mut);font-size:10px;font-weight:700;letter-spacing:.4px;display:flex;align-items:center;gap:8px;padding:9px 12px 3px}
+  .grp::after{content:"";flex:1;height:1px;background:var(--a-line)}
+  .opt{display:flex;align-items:center;gap:9px;padding:7px 12px}
+  .opt:hover{background:var(--a-hover)}
+  .opt .lbl{flex:1}
+  .opt.lock{opacity:.5}
+  .pro{background:var(--accent);color:#fff;font-size:8.5px;font-weight:800;border-radius:4px;padding:1px 5px;letter-spacing:.5px}
+  .field{background:var(--a-field);border:1px solid var(--a-line);border-radius:6px;padding:8px 10px;color:var(--a-fg);margin:2px 0}
+  .btns{display:flex;gap:8px;justify-content:flex-end;padding:10px 12px}
+  .b{border-radius:6px;padding:6px 14px;font-size:12.5px;font-weight:600}
+  .b.pri{background:var(--accent);color:#fff}
+  .b.sec{background:var(--a-field);color:var(--a-fg)}
+  .muted-note{color:var(--a-mut);font-size:11px;padding:2px 12px 10px}
+
+  /* tray menu mockup */
+  .tray{background:var(--a-bg);border:1px solid var(--a-line);border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,.22);
+        color:var(--a-fg);font-size:13px;max-width:280px;padding:5px 0}
+  .tray .it{padding:6px 14px;display:flex;gap:9px;align-items:center}
+  .tray .it:hover{background:var(--a-hover)}
+  .tray .it.title{font-weight:700;color:var(--a-fg)}
+  .tray .it.dim{color:var(--a-mut)}
+  .tray .sep{height:1px;background:var(--a-line);margin:5px 0}
+  .tray .chev{margin-left:auto;color:var(--a-mut)}
+
+  /* pinned panel mockup */
+  .pin{background:var(--a-bg);border:1px solid var(--a-line);border-radius:10px;color:var(--a-fg);
+       width:150px;box-shadow:0 12px 30px rgba(0,0,0,.22)}
+  .pin .hd{background:var(--a-header);padding:7px 10px;color:var(--accent);font-weight:600;font-size:12px;display:flex;gap:6px}
+  .pinrow{padding:6px 10px;font-size:12px;border-bottom:1px solid rgba(255,255,255,.03)}
+  footer{margin-top:60px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px}
+  kbd{background:#fff;border:1px solid #cfd3da;border-bottom-width:2px;border-radius:5px;padding:1px 7px;font-size:13px;font-family:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="logo"></div>
+    <div>
+      <h1>AskLightly</h1>
+      <p class="tag">AI on any text or code, in any app — with one hotkey.</p>
+    </div>
+  </header>
+
+  <div class="lead">
+    <strong>The whole idea:</strong> select some text anywhere, press your shortcut, pick what you
+    want, done. No copy-pasting into a chatbot, no switching windows. AskLightly lives in your
+    system tray and works in email, documents, browsers, chat, and code editors.
+  </div>
+
+  <h2>Quick start</h2>
+  <ol class="steps">
+    <li><strong>Find the tray icon.</strong> After launching, AskLightly's orange icon appears in
+        the system tray (bottom-right, near the clock — click the <strong>^</strong> to show hidden icons).</li>
+    <li><strong>Add your AI key.</strong> Right-click the tray icon → <strong>🔑 API Keys &amp; Provider…</strong>,
+        pick a provider (Claude / Gemini / OpenAI / DeepSeek / Grok), click the 🔗 link to create a free key, paste it, choose a model, and Save.</li>
+    <li><strong>Use it.</strong> Select text in any app and press <strong>your shortcut</strong>, then pick an
+        option from the popup. Not sure what your shortcut is? It's shown in the tray menu
+        (<em>⌨ Hotkey…</em>) and at the top of the popup, and you can set or change it in
+        <strong>Settings → SHORTCUT</strong>.</li>
+  </ol>
+
+  <div class="grid">
+    <figure>
+      <img class="shot" src="images/findtray.png" alt="The AskLightly icon in the Windows system tray">
+      <p class="cap">1 · Find the orange icon in the system tray</p>
+    </figure>
+    <figure>
+      <img class="shot" src="images/selectText.png" alt="Selecting text in another app">
+      <p class="cap">3 · Select text anywhere, then press your shortcut</p>
+    </figure>
+  </div>
+
+  <h2>The popup</h2>
+  <div class="grid">
+    <div>
+      <p>Select text, press the shortcut, and this appears next to your cursor. Options are grouped:</p>
+      <ul>
+        <li><strong>Text</strong> — rewrites your selection. Result offers <em>Replace</em> / <em>Discard</em>.</li>
+        <li><strong>Ask AI</strong> — answers questions about your selection. Result offers <em>Copy&nbsp;to&nbsp;Clipboard</em> / <em>Cancel</em>. Your text is never overwritten.</li>
+      </ul>
+      <p>All options are available to use — nothing is locked. Add your own from
+        <strong>📝 Manage Prompts…</strong>.</p>
+    </div>
+    <figure>
+      <img class="shot" src="images/popup.png" alt="The AskLightly popup, showing Text and Ask AI options">
+      <p class="cap">The popup, grouped into Text and Ask AI</p>
+    </figure>
+  </div>
+
+  <h2>Ask Anything — your own instruction</h2>
+  <div class="grid">
+    <figure>
+      <img class="shot" src="images/say.png" alt="The Ask Anything input box">
+      <p class="cap">Type any request; it runs on your selected text</p>
+    </figure>
+    <div>
+      <p>The built-in <strong>💬 Ask Anything…</strong> option lets you type any instruction on the fly —
+        <em>“Translate to Spanish”</em>, <em>“List the key risks”</em>, <em>“Rewrite as a tweet”</em>,
+        <em>“What does this code do?”</em></p>
+      <p>Your instruction is applied to whatever text you selected, so you never have to paste anything.
+        Press <kbd>Enter</kbd> to send.</p>
+    </div>
+  </div>
+
+  <h2>Pin mode — a persistent side panel</h2>
+  <div class="grid">
+    <div>
+      <p>Click the <strong>📌</strong> button in the popup header (or tray → <strong>📌 Open Pinned Panel</strong>)
+        to dock AskLightly to the side of your screen as an always-available launcher.</p>
+      <p>While pinned, it stays open and <strong>re-captures whatever text you have selected</strong> each time —
+        so you can go through a document paragraph by paragraph. Each result opens in its own window.
+        Click <strong>📍</strong> to unpin.</p>
+    </div>
+    <figure>
+      <img class="shot" src="images/pin.png" alt="The pinned side panel docked to the screen edge">
+      <p class="cap">Docked to the screen edge, stays open</p>
+    </figure>
+  </div>
+
+  <h2>The tray menu</h2>
+  <div class="grid">
+    <figure>
+      <img class="shot" src="images/tray.png" alt="The AskLightly tray right-click menu">
+      <p class="cap">Right-click the tray icon</p>
+    </figure>
+    <div>
+      <table>
+        <tr><th>Item</th><th>What it does</th></tr>
+        <tr><td>🎨 Theme</td><td>Switch Dark / Light</td></tr>
+        <tr><td>📌 Open Pinned Panel</td><td>Open the docked launcher</td></tr>
+        <tr><td>⚡ Direct Replace</td><td>Skip the preview and paste immediately</td></tr>
+        <tr><td>🔑 API Keys &amp; Provider…</td><td>Keys, provider, model, shortcut, key encryption</td></tr>
+        <tr><td>📝 Manage Prompts…</td><td>Add / edit / delete your options</td></tr>
+        <tr><td>✉ Send Feedback…</td><td>Email feedback to the developer</td></tr>
+        <tr><td>🚪 Exit</td><td>Quit AskLightly</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2>Settings &amp; the shortcut picker</h2>
+  <div class="grid">
+    <div>
+      <p>Open <strong>🔑 API Keys &amp; Provider…</strong> to set everything up:</p>
+      <ul>
+        <li><strong>Provider &amp; API key</strong> — with a 🔗 link to each provider's key page.</li>
+        <li><strong>Model</strong> — pick from the list or type any model name.</li>
+        <li><strong>Shortcut</strong> — click the box and <em>press</em> your shortcut. Use at least one modifier
+          (Ctrl / Alt / Shift / Win). Takes effect immediately.</li>
+        <li><strong>Encrypt API keys</strong> — protect your keys with your Windows account (DPAPI).</li>
+      </ul>
+    </div>
+    <figure>
+      <img class="shot" src="images/AIkey.png" alt="The API Keys &amp; Provider settings window">
+      <p class="cap">Provider, key, model, and shortcut — all in one window</p>
+    </figure>
+  </div>
+  <figure>
+    <img class="shot" src="images/shortcut.png" alt="The shortcut picker box">
+    <p class="cap">The shortcut picker — just press your keys, no typing codes</p>
+  </figure>
+
+  <h2>What's included</h2>
+  <p>Every feature in AskLightly is available to you — all the built-in options, custom prompts,
+     the pinned panel, every AI provider and model, Direct Replace, themes, and key encryption.
+     There is nothing locked and nothing to buy.</p>
+  <p>You only ever pay your AI provider for what you use, with your own API key. AskLightly itself
+     takes no cut and has no subscription.</p>
+
+  <h2>Tips &amp; troubleshooting</h2>
+  <h3>“No text selected”</h3>
+  <p>AskLightly only ever works on text you've <strong>highlighted</strong> — by design, it never reads a
+     whole page on its own. Select some text first, then press the shortcut.</p>
+  <h3>“AskLightly can't read selected text in …”</h3>
+  <p>Almost always, that app is running as <strong>Administrator</strong>. Windows does not allow a
+     normal app to read selections from an elevated one — a security rule that stops other programs
+     from controlling apps with admin rights. This usually shows up with <strong>Visual Studio</strong>,
+     terminals, or editors started with <em>Run as administrator</em>.</p>
+  <p><strong>How to check:</strong> look at that app's title bar. If it ends with
+     <em>(Administrator)</em>, that's the cause.</p>
+  <p><strong>How to fix it:</strong> close the app, then right-click its shortcut →
+     <strong>Properties</strong> → <strong>Compatibility</strong> and untick
+     <em>Run this program as an administrator</em>. (A pinned taskbar icon keeps its own copy of that
+     setting, so check there too.) Start it again and AskLightly will work in it.</p>
+  <p>AskLightly cannot work around this, and that is deliberate on Windows' part.</p>
+
+  <h3>It works in most apps, but not one particular app (work computers)</h3>
+  <p>If the app is not running as Administrator and AskLightly still can't pick up your selection —
+     often reporting <em>“No text selected”</em> even though text clearly is selected — the cause is
+     usually your organization's <strong>security or data-protection policy</strong> rather than
+     AskLightly.</p>
+  <p>On a managed or company-issued computer, IT commonly deploys tools that deliberately restrict
+     copying text out of certain applications. Common examples:</p>
+  <ul>
+    <li><strong>Data Loss Prevention (DLP) and endpoint security</strong> — blocks or silently empties
+      the clipboard for apps handling sensitive data.</li>
+    <li><strong>Sensitivity labels / rights-protected content</strong> — a document or email marked
+      Confidential can forbid copying, even by you.</li>
+    <li><strong>Virtual desktops and remote sessions</strong> (Citrix, VDI, Remote Desktop) — the app
+      is running on another machine, so its clipboard may not reach yours.</li>
+    <li><strong>Group Policy restrictions</strong> on specific applications.</li>
+  </ul>
+  <p>AskLightly reads your selection by asking the app to copy it, exactly as pressing
+     <kbd>Ctrl</kbd>+<kbd>C</kbd> would. So a good test is to <strong>select the text and press
+     <kbd>Ctrl</kbd>+<kbd>C</kbd> yourself, then try pasting it into Notepad</strong>. If that comes up
+     empty, the block is coming from your organization's policy, not from AskLightly — and nothing in
+     the app can or should override it. Use AskLightly in a different app, or speak to your IT team if
+     you believe the restriction is a mistake.</p>
+
+  <h3>The shortcut does nothing (or triggers something else)</h3>
+  <p>Another app may already use that combo. Set a conflict-free one in Settings → <strong>SHORTCUT</strong> —
+     the <strong>Recommended</strong> button picks <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>,
+     which almost never clashes.</p>
+  <h3>It replaced my text and I didn't want that</h3>
+  <p>Press <kbd>Ctrl</kbd>+<kbd>Z</kbd> in the app to undo, like any edit. To always preview first, keep
+     <strong>Direct Replace</strong> off. To only ever answer (never replace), use <strong>Ask AI</strong> options.</p>
+  <h3>“Selection is too large”</h3>
+  <p>A safety limit prevents sending an entire page by accident — select a smaller portion.</p>
+
+  <h2>Your privacy</h2>
+  <p>When you use an option, the text you selected is sent to the AI provider you chose (Claude / Gemini /
+     OpenAI / DeepSeek / Grok) to do the work — and <strong>nowhere else</strong>. AskLightly has no server of its own, uses
+     your own API key, and only reads text you deliberately select. See the full
+     <a href="privacy.html">privacy policy</a>.</p>
+
+  <footer>
+    AskLightly — AI on any text or code, in any app. Questions or ideas? Tray → ✉ Send Feedback…
+  </footer>
+
+</div>
+</body>
+</html>
