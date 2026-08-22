@@ -131,8 +131,9 @@
         <li><strong>Text</strong> — rewrites your selection. Result offers <em>Replace</em> / <em>Discard</em>.</li>
         <li><strong>Ask AI</strong> — answers questions about your selection. Result offers <em>Copy&nbsp;to&nbsp;Clipboard</em> / <em>Cancel</em>. Your text is never overwritten.</li>
       </ul>
-      <p>All options are available to use — nothing is locked. Add your own from
-        <strong>📝 Manage Prompts…</strong>.</p>
+      <p>The built-in Text and Ask&nbsp;AI options are ready to use. A few advanced features —
+        the custom <strong>💬 Ask Anything…</strong> prompt, adding your own prompts, and the
+        pinned panel — are <strong>coming in a future update</strong> and appear greyed out for now.</p>
     </div>
     <figure>
       <img class="shot" src="images/popup.png" alt="The AskLightly popup, showing Text and Ask AI options">
@@ -141,6 +142,8 @@
   </div>
 
   <h2>Ask Anything — your own instruction</h2>
+  <p class="lead"><strong>Coming soon:</strong> Ask Anything is planned for a future update and is
+     currently greyed out in the popup. Here's what it will do:</p>
   <div class="grid">
     <figure>
       <img class="shot" src="images/say.png" alt="The Ask Anything input box">
@@ -156,6 +159,8 @@
   </div>
 
   <h2>Pin mode — a persistent side panel</h2>
+  <p class="lead"><strong>Coming soon:</strong> the pinned side panel is planned for a future update
+     and is currently greyed out (both the 📌 button and the tray item). Here's what it will do:</p>
   <div class="grid">
     <div>
       <p>Click the <strong>📌</strong> button in the popup header (or tray → <strong>📌 Open Pinned Panel</strong>)
@@ -180,10 +185,10 @@
       <table>
         <tr><th>Item</th><th>What it does</th></tr>
         <tr><td>🎨 Theme</td><td>Switch Dark / Light</td></tr>
-        <tr><td>📌 Open Pinned Panel</td><td>Open the docked launcher</td></tr>
+        <tr><td>📌 Open Pinned Panel</td><td>Open the docked launcher <em>(coming soon)</em></td></tr>
         <tr><td>⚡ Direct Replace</td><td>Skip the preview and paste immediately</td></tr>
         <tr><td>🔑 API Keys &amp; Provider…</td><td>Keys, provider, model, shortcut, key encryption</td></tr>
-        <tr><td>📝 Manage Prompts…</td><td>Add / edit / delete your options</td></tr>
+        <tr><td>📝 Manage Prompts…</td><td>Edit, delete &amp; reorder options (adding new prompts is coming soon)</td></tr>
         <tr><td>✉ Send Feedback…</td><td>Email feedback to the developer</td></tr>
         <tr><td>🚪 Exit</td><td>Quit AskLightly</td></tr>
       </table>
@@ -196,7 +201,8 @@
       <p>Open <strong>🔑 API Keys &amp; Provider…</strong> to set everything up:</p>
       <ul>
         <li><strong>Provider &amp; API key</strong> — with a 🔗 link to each provider's key page.</li>
-        <li><strong>Model</strong> — pick from the list or type any model name.</li>
+        <li><strong>Model</strong> — enter your API key, then click <strong>↻ Load models</strong> to pick
+          from the provider's current list, or just type any model name. (The button stays disabled until a key is entered.)</li>
         <li><strong>Shortcut</strong> — click the box and <em>press</em> your shortcut. Use at least one modifier
           (Ctrl / Alt / Shift / Win). Takes effect immediately.</li>
         <li><strong>Encrypt API keys</strong> — protect your keys with your Windows account (DPAPI).</li>
@@ -212,10 +218,21 @@
     <p class="cap">The shortcut picker — just press your keys, no typing codes</p>
   </figure>
 
+  <h3>Is key encryption required?</h3>
+  <p><strong>No — it's optional and off by default.</strong> Your API keys are saved in a settings file
+     on your PC. Turning on <strong>Encrypt API keys</strong> scrambles them using your Windows account
+     (DPAPI) so that no other user — or anyone who copies that file — can read them. It's recommended
+     on shared or work computers, and needs no extra password.</p>
+  <p><strong>Moving to another PC?</strong> Encrypted keys can only be read on the same computer and
+     Windows account that created them. Turn encryption <em>off</em> and Save before copying your
+     settings to another machine, or simply re-enter your keys there.</p>
+
   <h2>What's included</h2>
-  <p>Every feature in AskLightly is available to you — all the built-in options, custom prompts,
-     the pinned panel, every AI provider and model, Direct Replace, themes, and key encryption.
-     There is nothing locked and nothing to buy.</p>
+  <p>AskLightly is free — there is nothing to buy. It includes all the built-in Text and Ask&nbsp;AI
+     options, every AI provider and model, Direct Replace, Dark / Light themes, and optional key encryption.</p>
+  <p>A few advanced features — the custom <strong>💬 Ask Anything…</strong> prompt, adding your own
+     prompts, and the pinned side panel — are <strong>coming in a future update</strong> and appear
+     greyed out for now.</p>
   <p>You only ever pay your AI provider for what you use, with your own API key. AskLightly itself
      takes no cut and has no subscription.</p>
 
@@ -268,6 +285,11 @@
      <strong>Direct Replace</strong> off. To only ever answer (never replace), use <strong>Ask AI</strong> options.</p>
   <h3>“Selection is too large”</h3>
   <p>A safety limit prevents sending an entire page by accident — select a smaller portion.</p>
+  <h3>“Your API key looks invalid” or “the model wasn't accepted”</h3>
+  <p>The AI provider rejected the request. Open <strong>🔑 API Keys &amp; Provider…</strong> and check that
+     your <strong>API key</strong> is correct (use the 👁 button to reveal it) and that the
+     <strong>model name</strong> is valid for that provider — click <strong>↻ Load models</strong> to see
+     the provider's current list and pick one.</p>
 
   <h2>Your privacy</h2>
   <p>When you use an option, the text you selected is sent to the AI provider you chose (Claude / Gemini /
